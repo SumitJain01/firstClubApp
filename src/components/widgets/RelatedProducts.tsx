@@ -29,7 +29,7 @@ export default function RelatedProducts({
       onPress={() => onSelect(item)}
     >
       <Image
-        source={{ uri: `https://picsum.photos/seed/related-${item?.id}/120/120` }}
+        source={{ uri: item?.image }}
         style={styles.image}
         resizeMode="cover"
       />

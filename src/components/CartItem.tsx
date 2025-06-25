@@ -12,7 +12,7 @@ const CartItemCard = React.memo(({ item, onRemove }: Props) => {
     return (
         <View style={styles.card}>
             <Image
-                source={{ uri: `https://picsum.photos/seed/${item.id}/200/120` }}
+                source={{ uri: item?.image}}
                 style={styles.image}
                 resizeMode="cover"
             />

@@ -118,6 +118,7 @@ export default function CartScreen() {
             </View>
           </>
         )}
+        <View style={{marginTop: 15}}/>
       </ScrollView>
 
       <TouchableOpacity
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingHorizontal: 1,
-    marginVertical: 2,
+    marginVertical: 4,
   },
   heading: {
     fontSize: 18,
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
     height: 400,
   },
   payButton: {
-    marginTop: 16,
+    marginTop: 8,
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: "center",

@@ -1,16 +1,24 @@
 import { Product } from '../types';
 
-export const fetchProducts = async (p: { pageParam: unknown; }): Promise<Product[]> => [
+
+const imagePool = [
+  'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/b/bb/Table_grapes_on_white.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg',
+];
+
+const rawProducts = [
   { id: '1', name: 'Apple', price: 100, isInStock: 0 },
   { id: '2', name: 'Banana', price: 50, isInStock: 1 },
   { id: '3', name: 'Orange', price: 80, isInStock: 0 },
   { id: '4', name: 'Kiwi', price: 120, isInStock: 1 },
   { id: '5', name: 'Mango', price: 150, isInStock: 1 },
-  { id: '6', name: 'Papaya', price: 100, isInStock: 1 },
   { id: '7', name: 'Potato', price: 50, isInStock: 1 },
-  { id: '8', name: 'Onion', price: 40, isInStock: 0 },
-  { id: '9', name: 'Chilli', price: 70, isInStock: 1 },
-  { id: '10', name: 'Beans', price: 80, isInStock: 1 },
   { id: '11', name: 'Grapes', price: 90, isInStock: 1 },
   { id: '12', name: 'Strawberry', price: 200, isInStock: 0 },
   { id: '13', name: 'Blueberry', price: 220, isInStock: 1 },
@@ -53,9 +61,18 @@ export const fetchProducts = async (p: { pageParam: unknown; }): Promise<Product
   { id: '50', name: 'Blackberry', price: 200, isInStock: 1 },
 ];
 
+export const fetchProducts = async (p: { pageParam: unknown }): Promise<Product[]> => {
+  return rawProducts.map((product, index) => ({
+    ...product,
+    image: imagePool[index % imagePool.length],
+  }));
+};
+
 export const fetchRelatedProducts = async (): Promise<Product[]> => [
-  { id: '4', name: 'Kiwi', price: 120, isInStock: 1 },
-  { id: '5', name: 'Mango', price: 150, isInStock: 1 },
-  { id: '9', name: 'Chilli', price: 70, isInStock: 1 },
-  { id: '10', name: 'Beans', price: 80, isInStock: 1 }
+  { id: '4', name: 'Kiwi', price: 120, isInStock: 1, image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg' },
+  { id: '5', name: 'Mango', price: 150, isInStock: 1, image: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg' },
+  { id: '1', name: 'Apple', price: 100, isInStock: 0,image: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpgs' },
+  { id: '2', name: 'Banana', price: 50, isInStock: 1 ,image: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg' },
+  { id: '3', name: 'Orange', price: 80, isInStock: 0 ,image: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg' },
+  
 ];

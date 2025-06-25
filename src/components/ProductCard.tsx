@@ -14,7 +14,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
   ({ item, inCart, addToCart, removeFromCart }) => (
     <View style={styles.card}>
       <Image
-        source={{ uri: `https://picsum.photos/seed/${item?.id}/200/120` }}
+        source={{ uri: item?.image }}
         style={styles.image}
         resizeMode="cover"
       />
