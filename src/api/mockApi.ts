@@ -71,7 +71,7 @@ export const fetchProducts = async (p: { pageParam: unknown }): Promise<Product[
 export const fetchRelatedProducts = async (): Promise<Product[]> => [
   { id: '4', name: 'Kiwi', price: 120, isInStock: 1, image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg' },
   { id: '5', name: 'Mango', price: 150, isInStock: 1, image: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg' },
-  { id: '1', name: 'Apple', price: 100, isInStock: 0,image: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpgs' },
+  { id: '1', name: 'Apple', price: 100, isInStock: 0,image: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg' },
   { id: '2', name: 'Banana', price: 50, isInStock: 1 ,image: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg' },
   { id: '3', name: 'Orange', price: 80, isInStock: 0 ,image: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg' },
   
