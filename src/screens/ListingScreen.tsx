@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   cartBar: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 50,
     left: 16,
     right: 16,
     backgroundColor: colors.primary,
