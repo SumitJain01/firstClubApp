@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "firstclubApp",
-    "slug": "firstclubApp",
+    "slug": "firstclub",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,8 +28,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "1cd91a18-8dee-4263-a2e7-1890fdf81c45"
+        "projectId": "b904478d-b09a-475a-aeda-685bae05b9a3"
       }
-    }
+    },
+    "owner": "vandanajain"
   }
 }
