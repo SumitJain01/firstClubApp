@@ -6,13 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  FlatList,
 } from "react-native";
 import colors from "../theme/color";
+import CartItemCard from "./CartItem";
+import { CartItem } from "../types";
 
 interface OutOfStockModalProps {
   visible: boolean;
-  items: string[];
+  items: CartItem[];
   onClose: () => void;
+  onRemove: (id: string) => void;
   onRemoveAll: () => void;
 }
 
@@ -20,6 +24,7 @@ const OutOfStockModal: React.FC<OutOfStockModalProps> = ({
   visible,
   items,
   onClose,
+  onRemove,
   onRemoveAll,
 }) => {
   return (
@@ -28,9 +33,17 @@ const OutOfStockModal: React.FC<OutOfStockModalProps> = ({
         <View style={styles.modal}>
           <Text style={styles.title}>⚠️ Items Out of Stock</Text>
           <Text style={styles.description}>
-            {items.join(", ")} {items?.length > 1 ? "are" : "is"} out of stock.
-            Please remove {items?.length > 1 ? "them" : "it"} to proceed.
+            Please remove the following item{items?.length > 1 ? "s" : ""} to proceed:
           </Text>
+
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item?.id}
+            renderItem={({ item }) => (
+              <CartItemCard item={item} onRemove={onRemove} />
+            )}
+            contentContainerStyle={{ paddingBottom: 12 }}
+          />
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -61,22 +74,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modal: {
-    width: width * 0.85,
+    width: width * 0.9,
+    maxHeight: "80%",
     backgroundColor: colors.white,
     borderRadius: 16,
-    padding: 20,
+    padding: 16,
     elevation: 6,
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     color: colors.primary,
-    marginBottom: 10,
+    marginBottom: 8,
   },
   description: {
     fontSize: 16,
     color: colors.text,
-    marginBottom: 20,
+    marginBottom: 12,
   },
   buttonContainer: {
     flexDirection: "row",

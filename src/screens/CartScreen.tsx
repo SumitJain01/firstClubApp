@@ -19,10 +19,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import CartItemCard from "../components/CartItem";
 import { BillSummary } from "../components/BillSummary";
 import OutOfStockModal from "../components/OutOfStockModal";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types";
 
-type Navigation = NativeStackNavigationProp<RootStackParamList, 'Cart'>;
+type Navigation = NativeStackNavigationProp<RootStackParamList, "Cart">;
 
 export default function CartScreen() {
   const [disabled, setDisabled] = useState(false);
@@ -30,19 +30,24 @@ export default function CartScreen() {
   const { cart, removeFromCart, removeAllFromCart } = useCartStore();
 
   const navigation = useNavigation<Navigation>();
-  
+
   const { data: widgets = [] } = useQuery({
     queryKey: ["widgets"],
     queryFn: fetchWidgets,
   });
 
   const outOfStockItems = useMemo(
-    () => cart.filter((item: { inStock: any; }) => !item?.inStock),
+    () => cart.filter((item: { inStock: any }) => !item?.inStock),
     [cart]
   );
 
   const subTotal = useMemo(
-    () => cart.reduce((sum: number, item: { qty: number; price: number; }) => sum + item?.qty * item?.price, 0),
+    () =>
+      cart.reduce(
+        (sum: number, item: { qty: number; price: number }) =>
+          sum + item?.qty * item?.price,
+        0
+      ),
     [cart]
   );
 
@@ -71,14 +76,16 @@ export default function CartScreen() {
   useEffect(() => {
     setDisabled(cart.length === 0);
   }, [cart]);
-  
+
   const handleRemoveAllOutOfStock = useCallback(async () => {
-    await Promise.all(outOfStockItems.map((item: { id: any; }) => removeAllFromCart(item?.id)));
+    await Promise.all(
+      outOfStockItems.map((item: { id: any }) => removeAllFromCart(item?.id))
+    );
     setShowModal(false);
     Toast.show({
-      type: 'success',
-      text1: 'Removed all out-of-stock items successfully!',
-      position: 'bottom',
+      type: "success",
+      text1: "Removed all out-of-stock items successfully!",
+      position: "bottom",
       visibilityTime: 4000,
     });
   }, [outOfStockItems, removeAllFromCart]);
@@ -130,13 +137,15 @@ export default function CartScreen() {
       >
         <Text style={styles.payButtonText}>Proceed to Pay</Text>
       </TouchableOpacity>
-
-      <OutOfStockModal
-        visible={showModal}
-        items={outOfStockItems.map((i: { name: any; }) => i.name)}
-        onClose={() => setShowModal(false)}
-        onRemoveAll={handleRemoveAllOutOfStock}
-      />
+      {outOfStockItems.length > 0 && (
+        <OutOfStockModal
+          visible={showModal}
+          items={outOfStockItems.map((i: { name: any }) => i)}
+          onClose={() => setShowModal(false)}
+          onRemoveAll={handleRemoveAllOutOfStock}
+          onRemove={removeItem}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 2,
-    marginBottom: 15
+    marginBottom: 15,
   },
   scroll: {
     paddingHorizontal: 1,
