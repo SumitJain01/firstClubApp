@@ -2,15 +2,16 @@ import { Product } from '../types';
 
 
 const imagePool = [
-  'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/b/bb/Table_grapes_on_white.jpg',
-  'https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/180px-Red_Apple.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/180px-Banana-Single.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Orange-Fruit-Pieces.jpg/180px-Orange-Fruit-Pieces.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Kiwi_aka.jpg/180px-Kiwi_aka.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hapus_Mango.jpg/180px-Hapus_Mango.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Patates.jpg/180px-Patates.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Table_grapes_on_white.jpg/180px-Table_grapes_on_white.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/PerfectStrawberry.jpg/180px-PerfectStrawberry.jpg',
 ];
+
 
 const rawProducts = [
   { id: '1', name: 'Apple', price: 100, isInStock: 0 },

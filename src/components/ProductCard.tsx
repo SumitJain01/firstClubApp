@@ -1,5 +1,12 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import colors from '../theme/color';
 import { Product, CartItem } from '../types';
 
@@ -11,38 +18,54 @@ export interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = React.memo(
-  ({ item, inCart, addToCart, removeFromCart }) => (
-    <View style={styles.card}>
-      <Image
-        source={{ uri: item?.image }}
-        style={styles.image}
-        resizeMode="cover"
-      />
-      <View style={styles.info}>
-        <Text style={styles.name}>{item?.name}</Text>
-        <Text style={styles.price}>₹ {item?.price}</Text>
-        <View style={styles.qtyRow}>
-          <TouchableOpacity
-            onPress={() => removeFromCart(item?.id)}
-            disabled={!inCart}
-            style={[
-              styles.qtyButton,
-              { backgroundColor: !inCart ? colors.gray : colors.danger },
-            ]}
-          >
-            <Text style={styles.qtyButtonText}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.qtyText}>{inCart?.qty ?? 0}</Text>
-          <TouchableOpacity
-            onPress={() => addToCart(item)}
-            style={[styles.qtyButton, { backgroundColor: colors.success }]}
-          >
-            <Text style={styles.qtyButtonText}>+</Text>
-          </TouchableOpacity>
+  ({ item, inCart, addToCart, removeFromCart }) => {
+    const [loading, setLoading] = useState(true);
+
+    return (
+      <View style={styles.card}>
+        <View style={styles.imageWrapper}>
+          {loading && (
+            <ActivityIndicator
+              style={StyleSheet.absoluteFill}
+              size="small"
+              color={colors.primary}
+            />
+          )}
+          <Image
+            source={{ uri: item?.image }}
+            style={styles.image}
+            resizeMode="cover"
+            onLoadStart={() => setLoading(true)}
+            onLoadEnd={() => setLoading(false)}
+          />
+        </View>
+
+        <View style={styles.info}>
+          <Text style={styles.name}>{item?.name}</Text>
+          <Text style={styles.price}>₹ {item?.price}</Text>
+          <View style={styles.qtyRow}>
+            <TouchableOpacity
+              onPress={() => removeFromCart(item?.id)}
+              disabled={!inCart}
+              style={[
+                styles.qtyButton,
+                { backgroundColor: !inCart ? colors.gray : colors.danger },
+              ]}
+            >
+              <Text style={styles.qtyButtonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.qtyText}>{inCart?.qty ?? 0}</Text>
+            <TouchableOpacity
+              onPress={() => addToCart(item)}
+              style={[styles.qtyButton, { backgroundColor: colors.success }]}
+            >
+              <Text style={styles.qtyButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
-  )
+    );
+  }
 );
 
 const styles = StyleSheet.create({
@@ -60,21 +83,28 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     elevation: 2,
   },
-  image: {
+  imageWrapper: {
     width: 140,
     height: 120,
-    borderRadius: 10,
     margin: 4,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#eee',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   info: {
     width: '50%',
   },
   name: {
-    fontFamily : 'sans-serif',
+    fontFamily: 'sans-serif',
     fontSize: 18,
     fontWeight: '600',
     color: colors.text,
-
   },
   price: {
     fontSize: 16,
@@ -85,14 +115,14 @@ const styles = StyleSheet.create({
   qtyRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-around',
+    justifyContent: 'space-around',
     width: 100,
     marginTop: 6,
     gap: 10,
     borderWidth: 1,
     borderColor: colors.primary,
     borderRadius: 8,
-    padding: 2
+    padding: 2,
   },
   qtyButton: {
     paddingHorizontal: 10,
